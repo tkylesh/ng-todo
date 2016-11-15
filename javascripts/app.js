@@ -11,6 +11,26 @@ app.controller("NavCtrl", function($scope){
 app.controller("TodoCtrl",function($scope){
 	$scope.welcome = "hellow";
 	$scope.showListView= true;
+	$scope.items=[
+	{
+		id:0,
+		task:"mow the lawn",
+		isCompleted: true,
+		assignedTo: "Zoe"
+	},
+	{
+		id:1,
+		task:"grade quizzes",
+		isCompleted: false,
+		assignedTo: "William"
+	},
+	{
+		id:2,
+		task:"take a nap",
+		isCompleted: false,
+		assignedTo: "Zoe"
+	}
+	];
 
 	$scope.allItems=function(){
 		console.log("you clicked all items");
