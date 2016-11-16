@@ -16,9 +16,29 @@ app.factory("ItemFactory",function($q, $http, FIREBASE_CONFIG){
 				reject(errorResponse);
 			})
 
+		});
+
+	}
+
+	var postNewItem = function(newItem){
+		return $q((resolve,reject) =>{
+			$http.post(`${FIREBASE_CONFIG.databaseURL}/items.json`, JSON.stringify({
+				assignedTo: newItem.assignedTo,
+				isCompleted: newItem.isCompleted,
+				task: newItem.task
+				})
+			)
+				.success(function(postResponse){
+					resolve(postResponse);
+				})
+				.error(function(postError){
+					reject(postError);
+				})
 		})
+	}
 
-	};
 
-	return {getItemList:getItemList}
+	return {getItemList:getItemList, postNewItem:postNewItem}
+
 });
+

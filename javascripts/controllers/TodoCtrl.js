@@ -10,6 +10,14 @@ app.controller("TodoCtrl",function($scope, ItemFactory){
 		$scope.items = fbItems;
 	});
 
+	let getItems = function(){
+		ItemFactory.getItemList().then(function(fbItems){
+			$scope.items = fbItems;
+		})
+	};
+
+	getItems();
+
 	$scope.allItems=function(){
 		console.log("you clicked all items");
 		$scope.showListView = true;
@@ -22,10 +30,14 @@ app.controller("TodoCtrl",function($scope, ItemFactory){
 
 	$scope.addNewItem = function(){
 		$scope.newTask.isCompleted = false;
-		$scope.newTask.id = $scope.items.length;
+		// $scope.newTask.id = $scope.items.length;
 		console.log("new task in function", $scope.newTask);
-		$scope.items.push($scope.newTask);
-		$scope.newTask="";
-		$scope.showListView = true;
+		// $scope.items.push($scope.newTask);
+		ItemFactory.postNewItem($scope.newTask).then(function(itemId){
+			getItems();
+			//itemId get's returned from a firebase post method
+			$scope.newTask={};
+			$scope.showListView = true;
+		});
 	};
 })
