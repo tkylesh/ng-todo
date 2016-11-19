@@ -1,6 +1,6 @@
 "use strict";
 
-app.controller("ItemListCtrl", function($scope, ItemListCtrl){
+app.controller("ItemListCtrl", function($scope, ItemFactory){
 	$scope.items=[];
 
 	let getItems = function(){
