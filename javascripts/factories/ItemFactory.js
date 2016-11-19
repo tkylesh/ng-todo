@@ -14,7 +14,7 @@ app.factory("ItemFactory",function($q, $http, FIREBASE_CONFIG){
 			})
 			.error(function(errorResponse){
 				reject(errorResponse);
-			})
+			});
 
 		});
 
@@ -33,8 +33,8 @@ app.factory("ItemFactory",function($q, $http, FIREBASE_CONFIG){
 				})
 				.error(function(postError){
 					reject(postError);
-				})
-		})
+				});
+		});
 	};
 
 	var deleteItem = function(itemId){
@@ -44,13 +44,13 @@ app.factory("ItemFactory",function($q, $http, FIREBASE_CONFIG){
 				resolve(deleteResponse);
 			})
 			.error(function(deleteError){
-				eject(deleteError);
-			})
-		})
+				reject(deleteError);
+			});
+		});
 	};
 
 
-	return {getItemList:getItemList, postNewItem:postNewItem, deleteItem:deleteItem}
+	return {getItemList:getItemList, postNewItem:postNewItem, deleteItem:deleteItem};
 
 });
 
