@@ -6,14 +6,10 @@ app.controller("TodoCtrl",function($scope, ItemFactory){
 	$scope.newTask={};
 	$scope.items=[];
 
-	ItemFactory.getItemList().then(function(fbItems){
-		$scope.items = fbItems;
-	});
-
 	let getItems = function(){
 		ItemFactory.getItemList().then(function(fbItems){
 			$scope.items = fbItems;
-		})
+		});
 	};
 
 	getItems();
@@ -40,4 +36,11 @@ app.controller("TodoCtrl",function($scope, ItemFactory){
 			$scope.showListView = true;
 		});
 	};
-})
+
+	$scope.deleteItem = function(itemId){
+		console.log("you deleted me", itemId);
+		ItemFactory.deleteItem(itemId).then(function(resonse){
+			getItems();
+		});
+	};
+});
